@@ -8,7 +8,7 @@ class AidatlarModel extends Model
 {
 	protected $table = 'aidatlar';
 	protected $primaryKey = 'aidat_id';
-	protected $allowedFields = ['kategori','aciklama','odeme_tarihi','tutar','daire_id','odendi_mi'];
+	protected $allowedFields = ['aciklama','odeme_tarihi','tutar','daire_id','odendi_mi'];
 
 	public function insertData($data)
 	{

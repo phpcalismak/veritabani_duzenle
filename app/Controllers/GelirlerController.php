@@ -13,7 +13,7 @@ class GelirlerController extends BaseController
     {
         $aidatlarModel = new AidatlarModel();
         $odendiAidatlar = $aidatlarModel->where('odendi_mi', 1)->findAll();
-       
+         $gelirlerModel = new GelirlerModel();
        foreach ($odendiAidatlar as $aidat) {
     $gelirlerModel = new GelirlerModel();
     
@@ -26,7 +26,6 @@ class GelirlerController extends BaseController
     if (!$existingRecord) {
         // Kaydı eklemek için veriyi hazırla
         $gelirVerisi = [
-            'kategori' => 'Aidat Ödemesi',
             'aciklama' => 'Daireye ait aidat ödemesi',
             'tutar' => $aidat['tutar'],
             'tarih' => date('Y-m-d'),
@@ -47,12 +46,12 @@ class GelirlerController extends BaseController
         $model = new GelirlerModel();
 
         $data = [
-            'kategori' => $this->request->getVar('txtKategori'),
             'aciklama' => $this->request->getVar('txtAciklama'),
             'tarih' => $this->request->getVar('txtOdemeTarihi'),
-            'tutar' => $this->request->getVar('txtTutar'), // txttutar yerine txtTutar düzeltildi
+            'tutar' => $this->request->getVar('txtTutar'), 
         ];
-        $save = $model->insert($data); // insertData yerine insert düzeltildi
+        $save = $model->insert($data); 
+        
         if ($save) {
             $data = $model->where('gelir_id', $save)->first();
             echo json_encode(["status" => true, 'data' => $data]);
@@ -79,7 +78,6 @@ class GelirlerController extends BaseController
         $model = new GelirlerModel();
         $gelir_id = $this->request->getVar('hdnUserId');
         $data = [
-            'kategori' => $this->request->getVar('txtKategori'),
             'aciklama' => $this->request->getVar('txtAciklama'),
             'tarih' => $this->request->getVar('txtOdemeTarihi'),
             'tutar' => $this->request->getVar('txtTutar'), // txttutar yerine txtTutar düzeltildi

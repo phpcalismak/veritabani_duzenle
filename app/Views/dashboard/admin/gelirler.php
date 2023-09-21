@@ -22,7 +22,6 @@
         <thead>
             <tr>
                 <th>aciklama</th>
-                <th>kategori</th>
                 <th>tarih</th>
                 <th>tutar</th>
                 <th width="280px">Action</th>
@@ -32,7 +31,6 @@
             <?php foreach ($gelirler as $gelir) : ?>
                 <tr id="<?= $gelir['gelir_id']; ?>">
                     <td><?= $gelir['aciklama']; ?></td>
-                    <td><?= $gelir['kategori']; ?></td>
                     <td><?= $gelir['tarih']; ?></td>
                     <td><?= $gelir['tutar']; ?></td>
                     
@@ -62,11 +60,6 @@
                             <label for="txtAciklama">Açıklama:</label>
                             <input type="text" class="form-control" id="txtAciklama" placeholder="Açıklama girin" name="txtAciklama">
                         </div>
-                         <div class="form-group">
-                            <label for="txtKategori">Kategori:</label>
-                            <input type="text" class="form-control" id="txtKategori" placeholder="Kategori girin" name="txtKategori">
-                        </div>
-                      
                          <div class="form-group">
                             <label for="txtOdemeTarihi">Tarih:</label>
                             <input type="text" class="form-control" id="txtOdemeTarihi" placeholder="Ödenmesi gereken tarih" name="txtOdemeTarihi">
@@ -100,10 +93,6 @@
                     <div class="modal-body">
                         <input type="hidden" name="hdnUserId" id="hdnUserId"/>
                       <!-- ***************   input alanı ******************* -->
-                        <div class="form-group">
-                            <label for="txtKategori">Kategori:</label>
-                            <input type="text" class="form-control" id="txtKategori" placeholder="Kategori girin" name="txtKategori">
-                        </div>
                         <div class="form-group">
                             <label for="txtAciklama">Açıklama:</label>
                             <input type="text" class="form-control" id="txtAciklama" placeholder="Açıklama girin" name="txtAciklama">
@@ -147,7 +136,6 @@
         rules: {
           
             txtAciklama: "required",
-            txtKategori: "required",
             txtOdemeTarihi: "required",
             txttutar: "required",
           
@@ -164,7 +152,6 @@
                     var newRow = [
                         res.data.gelir_id,
                         res.data.aciklama
-                         res.data.kategori,,
                         res.data.odeme_tarihi,
                         res.data.tutar,
                       
@@ -192,7 +179,6 @@
                     $('#updateModal').modal('show');
                     $('#updateUser #hdnUserId').val(res.data.gelir_id);
 					$('#updateUser #txtPassword').val(res.data.aciklama);
-                    $('#updateUser #txtUsername').val(res.data.kategori);
  
                 },
                 error: function (data) {}
@@ -221,7 +207,6 @@
                     updatedRow.data([
                         res.data.gelir_id,
                         res.data.aciklama,
-   						res.data.kategori,
                         res.data.odeme_tarihi,
                         res.data.tutar,
                       

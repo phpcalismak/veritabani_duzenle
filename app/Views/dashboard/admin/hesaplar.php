@@ -23,8 +23,7 @@
             <tr>
                 <th>hesap id</th>
                 <th>hesap turu</th>
-                    <th>email</th>
-                <th>kullanıcı adı</th>
+                <th>email</th>
                 <th>şifre</th>
                 <th width="280px">Action</th>
             </tr>
@@ -41,7 +40,6 @@
                         }
                     ?></td>
                       <td><?= $hesap['email']; ?></td>
-                    <td><?= $hesap['kullanici_adi']; ?></td>
                     <td><?= $hesap['sifre']; ?></td>
             <td>
         <a data-id="<?= $hesap['hesap_id']; ?>" class="btn btn-primary btnEdit">Edit</a>
@@ -77,10 +75,7 @@
                             <label for="txtEmail">Email:</label>
                             <input type="text" class="form-control" id="txtEmail" placeholder="Enter Email" name="txtEmail">
                         </div>
-                        <div class="form-group">
-                            <label for="txtPassword">Kullanıcı Adı:</label>
-                            <input type="text" class="form-control" id="txtPassword" placeholder="Enter Password" name="txtPassword">
-                        </div>
+                      
                          <div class="form-group">
                             <label for="txtDuzenlemeTarihi">Şifre:</label>
                             <input type="text" class="form-control" id="txtDuzenlemeTarihi" placeholder="Enter Password" name="txtDuzenlemeTarihi">
@@ -119,10 +114,7 @@
                             <label for="txtEmail">Email:</label>
                             <input type="text" class="form-control" id="txtEmail" placeholder="Enter Email" name="txtEmail">
                         </div>
-                        <div class="form-group">
-                            <label for="txtPassword">Kullanıcı Adı:</label>
-                            <input type="text" class="form-control" id="txtPassword" placeholder="Enter Password" name="txtPassword">
-                        </div>
+                    
                             <div class="form-group">
                             <label for="txtDuzenlemeTarihi">Şifre:</label>
                             <input type="text" class="form-control" id="txtDuzenlemeTarihi" placeholder="Enter Password" name="txtDuzenlemeTarihi">
@@ -155,7 +147,7 @@
             rules: {
                 txtEmail: "required",
                 txtUsername: "required",
-                txtPassword: "required",
+               
                 txtDuzenlemeTarihi: "required",
             },
             messages: {},
@@ -170,7 +162,7 @@
                         var newRow = [
                             res.data.hesap_id,
                             res.data.hesap_turu,
-                            res.data.kullanici_adi,
+                     
                             res.data.email,
                             res.data.sifre,
                             '<div class="btn-group">' +
@@ -199,7 +191,7 @@
                     $('#updateModal').modal('show');
                     $('#updateUser #hdnUserId').val(res.data.hesap_id);
                     $('#updateUser #txtUsername').val(res.data.kategori);
-                    $('#updateUser #txtPassword').val(res.data.aciklama);
+                
                 },
                 error: function (data) { }
             });
@@ -208,7 +200,7 @@
         $("#updateUser").validate({
             rules: {
                 txtUsername: "required",
-                txtPassword: "required",
+              
                 txtDuzenlemeTarihi: "required",
             },
             messages: {},
@@ -225,7 +217,7 @@
                             res.data.hesap_id,
                             res.data.hesap_turu,
                              res.data.email,
-                            res.data.kullanici_adi,
+                         
                             res.data.sifre,
                             '<div class="btn-group">' +
                             '<button type="button" class="btn btn-primary btnEdit" data-id="' + res.data.hesap_id + '">Edit</button>' +

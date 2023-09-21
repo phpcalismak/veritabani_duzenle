@@ -8,7 +8,7 @@ class GelirlerModel extends Model
 {
 	protected $table = 'gelirler';
 	protected $primaryKey = 'gelir_id';
-	protected $allowedFields = ['aciklama','kategori','tarih','tutar'];
+	protected $allowedFields = ['aciklama','tarih','tutar'];
 
 	public function insertData($data)
 	{

@@ -103,3 +103,6 @@ $routes->get('iletisim', 'IletisimController::index');
 
 //excel
 
+$routes->get('hesap_excel_form' , 'ExcelController::index');
+$routes->post('hesap_excel_upload', 'ExcelController::hesap_excel_upload');
+

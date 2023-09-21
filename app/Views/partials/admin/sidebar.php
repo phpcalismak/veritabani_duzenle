@@ -79,6 +79,14 @@
               </p>
             </a>
           </li>
+           <li class="nav-item">
+            <a href="<?= site_url('/daire_sakinleri'); ?> " class="nav-link">
+              <i class="nav-icon fas fa-th"></i>
+              <p>
+                Daire Sakinleri
+              </p>
+            </a>
+          </li>
 
         
           <li class="nav-item">
@@ -117,16 +125,25 @@
               </p>
             </a>
           </li>
-   
+   <!--
           <li class="nav-item">
-            <a href="<?= site_url('blok_duzeni'); ?>" class="nav-link">
+            <a href="<?php // site_url('blok_duzeni'); ?>" class="nav-link">
               <i class="nav-icon fas fa-th"></i>
               <p>
                 Site Düzeni
               </p>
             </a>
           </li>
-        
+-->   
+           <li class="nav-item">
+            <a href="<? site_url('blok_duzeni'); ?>" class="nav-link">
+              <i class="nav-icon fas fa-th"></i>
+              <p>
+                Duyurular
+              </p>
+            </a>
+          </li>
+     
           <li class="nav-item">
             <a href="<?= site_url('site_ayarlari'); ?>" class="nav-link">
               <i class="nav-icon fas fa-th"></i>

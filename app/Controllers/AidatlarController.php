@@ -23,14 +23,12 @@ class AidatlarController extends BaseController
     $dairelerModel = new DairelerModel();
 
     // Formdan gelen verileri alın
-    $kategori = $this->request->getVar('txtKategori');
     $aciklama = $this->request->getVar('txtAciklama');
     $odemeTarihi = $this->request->getVar('txtOdemeTarihi');
     $tutar = $this->request->getVar('txttutar');
 
     // Veritabanına eklemek üzere aidat verilerini bir diziye yerleştirin
     $data = [
-        'kategori' => $kategori,
         'aciklama' => $aciklama,
         'odeme_tarihi' => $odemeTarihi,
         'tutar' => $tutar,
@@ -49,7 +47,6 @@ class AidatlarController extends BaseController
             // Her daireye aidat eklemek için yeni bir veri oluşturun
             $daireAidatData = [
                 'daire_id' => $daireId,
-                'kategori' => $kategori,
                 'aciklama' => $aciklama,
                 'odeme_tarihi' => $odemeTarihi,
                 'tutar' => $tutar,
@@ -86,7 +83,7 @@ class AidatlarController extends BaseController
         $model = new AidatlarModel();
         $aidat_id = $this->request->getVar('hdnUserId');
         $data = [
-            'kategori' => $this->request->getVar('txtKategori'),
+          
             'aciklama' => $this->request->getVar('txtAciklama'),
             'odeme_tarihi' => $this->request->getVar('txtOdemeTarihi'),
             'tutar' => $this->request->getVar('txttutar'),

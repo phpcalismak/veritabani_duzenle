@@ -13,7 +13,7 @@
         </div>
         <div class="col-lg-2">
             <button type="button" class="btn btn-warning mb-3" data-bs-toggle="modal" data-bs-target="#kategoriModal">
-Kategorileri Düzenle
+                Kategorileri Düzenle
             </button>       
             <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#addModal">
                 Gider Ekle

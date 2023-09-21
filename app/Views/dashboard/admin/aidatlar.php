@@ -22,7 +22,6 @@
         <thead>
             <tr>
                 <th>aidat id</th>
-                <th>kategori</th>
                 <th>aciklama</th>
                 <th>odeme_tarihi</th>
                 <th>tutar</th>
@@ -36,7 +35,6 @@
             <?php foreach ($aidatlar as $aidat) : ?>
                 <tr id="<?= $aidat['aidat_id']; ?>">
                     <td><?= $aidat['aidat_id']; ?></td>
-                    <td><?= $aidat['kategori']; ?></td>
                     <td><?= $aidat['aciklama']; ?></td>
                     <td><?= $aidat['odeme_tarihi']; ?></td>
                     <td><?= $aidat['tutar']; ?></td>
@@ -62,10 +60,7 @@
                     <div class="modal-body">
 
                         <!--   input alanı -->
-                        <div class="form-group">
-                            <label for="txtKategori">Kategori:</label>
-                            <input type="text" class="form-control" id="txtKategori" placeholder="Kategori girin" name="txtKategori">
-                        </div>
+                       
                         <div class="form-group">
                             <label for="txtAciklama">Açıklama:</label>
                             <input type="text" class="form-control" id="txtAciklama" placeholder="Açıklama girin" name="txtAciklama">
@@ -104,10 +99,7 @@
                     <div class="modal-body">
                         <input type="hidden" name="hdnUserId" id="hdnUserId"/>
                       <!-- ***************   input alanı ******************* -->
-                        <div class="form-group">
-                            <label for="txtKategori">Kategori:</label>
-                            <input type="text" class="form-control" id="txtKategori" placeholder="Kategori girin" name="txtKategori">
-                        </div>
+                        
                         <div class="form-group">
                             <label for="txtAciklama">Açıklama:</label>
                             <input type="text" class="form-control" id="txtAciklama" placeholder="Açıklama girin" name="txtAciklama">
@@ -146,7 +138,6 @@
     $(document).ready(function () {
     $("#addUser").validate({
         rules: {
-            txtKategori: "required",
             txtAciklama: "required",
             txtOdemeTarihi: "required",
             txttutar: "required",
@@ -163,7 +154,6 @@
                 success: function (res) {
                     var newRow = [
                         res.data.aidat_id,
-                        res.data.kategori,
                         res.data.aciklama,
                         res.data.odeme_tarihi,
                         res.data.tutar,
@@ -191,7 +181,7 @@
                 success: function (res) {
                     $('#updateModal').modal('show');
                     $('#updateUser #hdnUserId').val(res.data.aidat_id);
-                    $('#updateUser #txtUsername').val(res.data.kategori);
+                 
                     $('#updateUser #txtPassword').val(res.data.aciklama);
                 },
                 error: function (data) {}
@@ -201,7 +191,7 @@
 
     $("#updateUser").validate({
         rules: {
-            txtKategori: "required",
+          
             txtAciklama: "required",
             txtOdemeTarihi: "required",
             txttutar: "required",
@@ -219,7 +209,7 @@
                     var updatedRow = userTable.row('#' + res.data.aidat_id);
                     updatedRow.data([
                         res.data.aidat_id,
-                        res.data.kategori,
+                       
                         res.data.aciklama,
                         res.data.odeme_tarihi,
                         res.data.tutar,

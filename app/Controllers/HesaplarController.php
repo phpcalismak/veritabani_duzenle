@@ -37,7 +37,7 @@ public function index()
 
         $data = [
             'hesap_turu' => $this->request->getVar('txtUserName'),
-            'kullanici_adi' => $this->request->getVar('txtPassword'),
+           
             'sifre' => $this->request->getVar('txtDuzenlemeTarihi'),
             
 
@@ -68,7 +68,7 @@ public function index()
         $daire_id = $this->request->getVar('hdnUserId');
         $data = [
            'hesap_turu' => $this->request->getVar('txtUserName'),
-            'kullanici_adi' => $this->request->getVar('txtPassword'),
+            
             'sifre' => $this->request->getVar('txtDuzenlemeTarihi'),
             
 

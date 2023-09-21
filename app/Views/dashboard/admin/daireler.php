@@ -7,24 +7,19 @@
 
     <div class="row">
         <div class="col-lg-8">
-            <h2>daireler</h2>
+            <h2>Daireler</h2>
         </div>
-
-
-
         <div class="col-md-2">
-            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addModal">
-                Daire Ekle
-            </button>
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addModal">Daire Ekle</button>
         </div>
     </div>
     <table class="table table-bordered table-striped" id="userTable">
         <thead>
             <tr>
-                <th>daire id</th>
-                <th>blok_adi</th>
-                <th>daire_no</th>
-                <th>daire_tipi</th>
+               
+                <th>Blok Adı</th>
+                <th>Daire No</th>
+                <th>Daire Tipi</th>
                 <th>Aidat Borcu</th>
 
                 <th width="280px">Action</th>
@@ -33,7 +28,6 @@
         <tbody>
             <?php foreach ($daireler as $daire) : ?>
                 <tr id="<?= $daire['daire_id']; ?>">
-                    <td><?= $daire['daire_id']; ?></td>
                     <td><?= $daire['blok_adi']; ?></td>
                     <td><?= $daire['daire_no']; ?></td>
                     <td><?= $daire['daire_tipi']; ?></td>
