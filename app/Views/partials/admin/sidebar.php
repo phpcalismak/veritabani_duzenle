@@ -79,15 +79,7 @@
               </p>
             </a>
           </li>
-           <li class="nav-item">
-            <a href="<?= site_url('/daire_sakinleri'); ?> " class="nav-link">
-              <i class="nav-icon fas fa-th"></i>
-              <p>
-                Daire Sakinleri
-              </p>
-            </a>
-          </li>
-
+        
         
           <li class="nav-item">
             <a href="<?= site_url('gelirler'); ?>" class="nav-link">
@@ -136,10 +128,19 @@
           </li>
 -->   
            <li class="nav-item">
-            <a href="<? site_url('blok_duzeni'); ?>" class="nav-link">
+            <a href="<?= base_url('duyuru_gonder'); ?>" class="nav-link">
               <i class="nav-icon fas fa-th"></i>
               <p>
                 Duyurular
+              </p>
+            </a>
+          </li>
+
+           <li class="nav-item">
+            <a href="<?= base_url('hesap_excel_form'); ?>" class="nav-link">
+              <i class="nav-icon fas fa-th"></i>
+              <p>
+                Toplu Veri Ekle
               </p>
             </a>
           </li>
@@ -152,9 +153,6 @@
               </p>
             </a>
           </li>
-
-
-
          
         </ul>
       </nav>

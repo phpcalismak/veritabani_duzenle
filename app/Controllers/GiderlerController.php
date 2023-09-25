@@ -119,6 +119,35 @@ class GiderlerController extends BaseController
         }
     }
 
+ public function giderKategoriDuzenle($kategori_id = null)
+{
+    $kategoriAdi = $this->request->getPost('kategori_adi'); // Assuming you have a form field named 'kategori_adi' to specify the new category name.
+    
+    $model = new GiderKategorileriModel();
+    
+    // Check if the category exists
+    $existingCategory = $model->find($kategori_id);
+    
+    if (!$existingCategory) {
+        echo json_encode(['status' => false, 'message' => 'Category not found']);
+        return;
+    }
+
+    // Update the category name
+    $data = [
+        'kategori_adi' => $kategoriAdi,
+    ];
+
+    $update = $model->update($kategori_id, $data);
+
+    if ($update) {
+        echo json_encode(['status' => true, 'message' => 'Category updated successfully']);
+    } else {
+        echo json_encode(['status' => false, 'message' => 'Category update failed']);
+    }
+}
+
+
     public function giderKategoriSil($kategori_id = null)
     {
         $model = new GiderKategorileriModel();

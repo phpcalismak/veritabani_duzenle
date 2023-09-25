@@ -81,6 +81,16 @@
               </p>
             </a>
           </li>
+
+         <li class="nav-item">
+            <a href="<?= site_url('duyurular'); ?>" class="nav-link">
+              <i class="nav-icon fas fa-th"></i>
+              <p>
+                Duyurular
+              </p>
+            </a>
+          </li>
+         
          
          <li class="nav-item">
             <a href="<?= site_url('iletisim'); ?>" class="nav-link">

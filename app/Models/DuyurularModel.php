@@ -4,11 +4,11 @@ namespace App\Models;
 use CodeIgniter\Database\ConnectionInterface;
 use CodeIgniter\Model;
 
-class DairelerModel extends Model
+class DuyurularModel extends Model
 {
-	protected $table = 'daireler';
-	protected $primaryKey = 'daire_id';
-	protected $allowedFields = ['blok_adi','daire_no'];
+	protected $table = 'duyurular';
+	protected $primaryKey = 'duyuru_id';
+	protected $allowedFields = ['duyuru_basligi','duyuru_metni','duyuru_tarihi'];
 
 	public function insertData($data)
 	{

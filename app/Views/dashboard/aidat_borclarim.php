@@ -16,7 +16,7 @@
                 <thead>
                     <tr>
                         <th>Aidat ID</th>
-                        <th>Kategori</th>
+               
                         <th>Açıklama</th>
                         <th>Ödeme Tarihi</th>
                         <th>Tutar</th>
@@ -27,7 +27,7 @@
                     <?php foreach ($borcluAidatlar as $aidat) : ?>
                         <tr>
                             <td><?= $aidat['aidat_id']; ?></td>
-                            <td><?= $aidat['kategori']; ?></td>
+                          
                             <td><?= $aidat['aciklama']; ?></td>
                             <td><?= $aidat['odeme_tarihi']; ?></td>
                             <td><?= $aidat['tutar']; ?></td>

@@ -134,6 +134,8 @@
         </div>
     </div>
 
+
+
 <!-- Gider Kategorisi Modal -->
 <div class="modal fade" id="kategoriModal" tabindex="-1" aria-labelledby="ModalLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -143,32 +145,38 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <table>
-                    <p><strong>Mevcut Kategoriler</strong></p>
-                    <hr>
-                    <?php foreach ($giderKategorileri as $kategori): ?>
-                        <tr id="<?= $kategori['kategori_id'] ?>">
-                            <td><?= $kategori['kategori_adi'] ?></td>
-                            <td>  <a data-id="<?= $kategori['kategori_id'] ?>" class="btn btn-danger btnDeleteKategori">Sil</a></td>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Kategori Adı</th>
+                            <th>Actions</th>
                         </tr>
-                    <?php endforeach ?>
-
+                    </thead>
+                    <tbody>
+                        <?php foreach ($giderKategorileri as $kategori): ?>
+                            <tr id="<?= $kategori['kategori_id'] ?>">
+                                <td><?= $kategori['kategori_adi'] ?></td>
+                                <td>
+                                    <button type="button" class="btn btn-primary btnEditKategori" data-id="<?= $kategori['kategori_id'] ?>">Edit</button>
+                                    <button type="button" class="btn btn-danger btnDeleteKategori" data-id="<?= $kategori['kategori_id'] ?>">Delete</button>
+                                </td>
+                            </tr>
+                        <?php endforeach ?>
+                    </tbody>
                 </table>
             </div>
-                <form id="updateUser" name="updateUser" action="<?= site_url('giderler/kategori'); ?>" method="post">
-                   <div class="modal-body">
-                        <div class="form-group">
-                            <label for="txtKategori">Gider Kategorisi:</label>
-                            <input type="text" class="form-control" id="txtKategori" placeholder="Gider Kategorisi" name="txtKategori">
-                        </div>
-                        <div class="modal-footer">
-                        <button type="submit" class="btn btn-primary">Kategoriyi Ekle</button>
+            <form id="addKategori" name="addKategori" action="<?= site_url('giderler/kategori'); ?>" method="post">
+                <div class="modal-footer">
+                    <div class="form-group">
+                        <input type="text" class="form-control" id="txtKategori" placeholder="Gider Kategorisi" name="txtKategori">
                     </div>
-                    </div>
-            </div>
+                    <button type="submit" class="btn btn-primary">Kategoriyi Ekle</button>
+                </div>
+            </form>
         </div>
     </div>
 </div>
+
 
 <!-- /.content-wrapper -->
 <?= $this->endSection('content') ?>
@@ -292,6 +300,29 @@
                     }
                 });
             }
+        });
+
+        $('body').on('click', '.btnEditKategori', function () {
+            var kategori_id = $(this).attr('data-id');
+
+            $.ajax({
+                url: '<?= site_url('giderler/giderkategoriduzenle/') ?>' + kategori_id,
+                type: 'GET',
+                dataType: 'json',
+                success: function (res) {
+                    if (res.status) {
+                        // Populate the edit modal with category details
+                        $('#editKategoriModal #kategori_id').val(res.data.kategori_id);
+                        $('#editKategoriModal #txtEditKategori').val(res.data.kategori_adi);
+                        $('#editKategoriModal').modal('show');
+                    } else {
+                        alert('Kategori bilgileri alınamadı.');
+                    }
+                },
+                error: function () {
+                    alert('Bir hata oluştu.');
+                }
+            });
         });
     
     });

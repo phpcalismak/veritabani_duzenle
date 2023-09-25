@@ -20,7 +20,7 @@ class RegisterController extends BaseController
         helper(['form']);
 
         $rules = [
-            'kullanici_adi' => 'required|min_length[3]|max_length[20]',
+           
             'email' => 'required|min_length[6]|max_length[50]|valid_email|is_unique[hesaplar.email]',
             'sifre' => 'required|min_length[6]|max_length[200]',
             'confpassword' => 'matches[sifre]'
@@ -30,11 +30,9 @@ class RegisterController extends BaseController
             $model = new HesaplarModel();
             $emailString = $this->request->getVar('email');
             $sifreString = $this->request->getVar('sifre');
-            $kullaniciAdi = $this->request->getVar('kullanici_adi');
             $aktivasyonKodu = str_pad(mt_rand(1, 999999), 6, '0', STR_PAD_LEFT);
 
             $data = [
-                'kullanici_adi' => $kullaniciAdi,
                 'email' => $emailString,
                 'sifre' => password_hash($sifreString, PASSWORD_DEFAULT),
                 'aktivasyon_kodu' => $aktivasyonKodu
@@ -78,12 +76,15 @@ class RegisterController extends BaseController
             $currentTime = time();
             $activationTimeLimit = 60 * 2;
 
-            if (($currentTime - $createdAt) <= $activationTimeLimit) {
-                $model->update($user['hesap_id'], ['hesap_onay' => 1]);
-                return redirect()->to('/login');
-            } else {
-                return redirect()->to('/register');
-            }
+           try {
+    $model->update($user['hesap_id'], ['hesap_onay' => 1]);
+    return redirect()->to('/login');
+} catch (\Exception $e) {
+    // Log the error message for debugging purposes
+    log_message('error', 'Database error: ' . $e->getMessage());
+    // Handle the error gracefully, e.g., redirect with an error message
+    return redirect()->to('/register')->with('error', 'Database error occurred');
+}
         } else {
             return redirect()->to('/register');
         }

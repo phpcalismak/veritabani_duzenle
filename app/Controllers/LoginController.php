@@ -38,7 +38,6 @@ class LoginController extends BaseController
             if ($pass) {
                 $ses_data = [
                     'hesap_id' => $data['hesap_id'],
-                    'kullanici_adi' => $data['kullanici_adi'],
                     'email' => $data['email'],
                     'daire_id' => $data['daire_id'],
                     'hesap_turu' => $data['hesap_turu'],

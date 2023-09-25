@@ -15,31 +15,34 @@ class ExcelController extends BaseController
         $data['website_ayarlari'] = $this->data['website_ayarlari'];
         return view('dashboard/hesap_excel_form', $data);
     }
-
-    public function hesap_excel_upload()
+      public function hesap_excel_template()
     {
-        if ($this->request->getMethod() == 'post') {
-            $uploadedFile = $this->request->getFile('excel_file');
+        $file = WRITEPATH. 'uploads/kullanici_template_excel.xlsx';
+        return $this->response->download($file,null)->setFileName('kullanici_template_excel.xlsx');
+        return redirect->to('hesap_excel_form');
+    }
 
-            if ($uploadedFile->isValid() && !$uploadedFile->hasMoved()) {
-                $spreadsheet = IOFactory::load($uploadedFile->getTempName());
-                $sheet = $spreadsheet->getActiveSheet();
+ public function hesap_excel_upload()
+{
+    if ($this->request->getMethod() == 'post') {
+        $uploadedFile = $this->request->getFile('excel_file');
 
-                $data = $sheet->toArray();
+        if ($uploadedFile->isValid() && !$uploadedFile->hasMoved()) {
+            $spreadsheet = IOFactory::load($uploadedFile->getTempName());
+            $sheet = $spreadsheet->getActiveSheet();
 
-                $data = array_slice($data, 3);
+            $data = $sheet->toArray();
 
-                $dairelerModel = new DairelerModel();
-                $hesaplarModel = new HesaplarModel();
-                $daireSakinleriModel = new DaireSakinleriModel();
+            $data = array_slice($data, 4);
 
-                $insertedRows = 0; // Eklenen satırları saymak için sayaç
+            $dairelerModel = new DairelerModel();
+            $hesaplarModel = new HesaplarModel();
+            $daireSakinleriModel = new DaireSakinleriModel();
 
-                foreach ($data as $row) {
-                    if (empty(array_filter($row))) {
-                        continue;
-                    }
+            $insertedRows = 0; // Eklenen satırları saymak için sayaç
 
+            foreach ($data as $row) {
+                if (!empty(array_filter($row))) {
                     // Verileri daha önce eklenip eklenmediğini kontrol et
                     $existingData = $dairelerModel
                         ->where('blok_adi', $row[7])
@@ -80,11 +83,15 @@ class ExcelController extends BaseController
                         $insertedRows++; // Satır başarıyla eklenirse sayaçı artır
                     }
                 }
-
-                return redirect()->to('/success')->with('success', $insertedRows . ' satır Excel verileri başarıyla veritabanına eklendi.');
             }
-        }
 
-        return view('hesap_excel_form');
+            return redirect()->to('/success')->with('success', $insertedRows . ' satır Excel verileri başarıyla veritabanına eklendi.');
+        }
     }
+
+    return view('hesap_excel_form');
 }
+
+
+}
+

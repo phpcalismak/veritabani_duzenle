@@ -13,33 +13,47 @@
             <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addModal">Daire Ekle</button>
         </div>
     </div>
-    <table class="table table-bordered table-striped" id="userTable">
-        <thead>
-            <tr>
-               
-                <th>Blok Adı</th>
-                <th>Daire No</th>
-                <th>Daire Tipi</th>
-                <th>Aidat Borcu</th>
 
-                <th width="280px">Action</th>
+    
+  <table class="table table-bordered table-striped" id="userTable">
+    <thead>
+        <tr>
+            <th>Blok Adı</th>
+            <th>Daire No</th>
+            <th>Daire Sahibi</th> <!-- Add this column -->
+            <th>Aidat Borcu</th>
+            <th width="280px">Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        <?php foreach ($daireler as $daire) : ?>
+            <tr id="<?= $daire['daire_id']; ?>">
+                <td><?= $daire['blok_adi']; ?></td>
+                <td><?= $daire['daire_no']; ?></td>
+                <td><?= $daireSahipleri[$daire['daire_id']] ?? 'Bilinmiyor'; ?></td> <!-- Display daire sahibi's name -->
+                <td>
+                    <!-- Display aidat borcu for this daire -->
+                    <?php
+                    $aidatBorcu = $aidat_borcu[$daire['daire_id']] ?? [];
+                    if (!empty($aidatBorcu)) {
+                        foreach ($aidatBorcu as $aidat) {
+                            echo 'Aidat Tutarı: ' . $aidat['tutar'] . '<br>';
+                            echo 'Aidat Ödeme Tarihi: ' . $aidat['odeme_tarihi'] . '<br>';
+                        }
+                    } else {
+                        echo 'Borç Yok';
+                    }
+                    ?>
+                </td>
+                <td>
+                    <a data-id="<?= $daire['daire_id']; ?>" class="btn btn-primary btnEdit">Edit</a>
+                    <a data-id="<?= $daire['daire_id']; ?>" class="btn btn-danger btnDelete">Delete</a>
+                </td>
             </tr>
-        </thead>
-        <tbody>
-            <?php foreach ($daireler as $daire) : ?>
-                <tr id="<?= $daire['daire_id']; ?>">
-                    <td><?= $daire['blok_adi']; ?></td>
-                    <td><?= $daire['daire_no']; ?></td>
-                    <td><?= $daire['daire_tipi']; ?></td>
-                    <td><?= $daire['kasa']; ?></td>
-                    <td>
-                        <a data-id="<?= $daire['daire_id']; ?>" class="btn btn-primary btnEdit">Edit</a>
-                        <a data-id="<?= $daire['daire_id']; ?>" class="btn btn-danger btnDelete">Delete</a>
-                    </td>
-                </tr>
-            <?php endforeach; ?>
-        </tbody>
-    </table>
+        <?php endforeach; ?>
+    </tbody>
+</table>
+
 
 
     <div class="modal fade" id="addModal" tabindex="-1" aria-labelledby="ModalLabel" aria-hidden="true">
@@ -61,10 +75,7 @@
                             <label for="txtPassword">Password:</label>
                             <input type="text" class="form-control" id="txtPassword" placeholder="Enter Password" name="txtPassword">
                         </div>
-                         <div class="form-group">
-                            <label for="txtDuzenlemeTarihi">Duzenleme Tarihi:</label>
-                            <input type="text" class="form-control" id="txtDuzenlemeTarihi" placeholder="Enter Password" name="txtDuzenlemeTarihi">
-                        </div>
+                       
                          <div class="form-group">
                             <label for="txtOdemeTarihi">Odeme Tarihi:</label>
                             <input type="text" class="form-control" id="txtOdemeTarihi" placeholder="Enter Password" name="txtOdemeTarihi">
@@ -109,10 +120,7 @@
                             <label for="txtPassword">Password:</label>
                             <input type="text" class="form-control" id="txtPassword" placeholder="Enter Password" name="txtPassword">
                         </div>
-                            <div class="form-group">
-                            <label for="txtDuzenlemeTarihi">Duzenleme Tarihi:</label>
-                            <input type="text" class="form-control" id="txtDuzenlemeTarihi" placeholder="Enter Password" name="txtDuzenlemeTarihi">
-                        </div>
+                           
                          <div class="form-group">
                             <label for="txtOdemeTarihi">Odeme Tarihi:</label>
                             <input type="text" class="form-control" id="txtOdemeTarihi" placeholder="Enter Password" name="txtOdemeTarihi">
@@ -152,7 +160,7 @@
         rules: {
             txtUsername: "required",
             txtPassword: "required",
-            txtDuzenlemeTarihi: "required",
+
             txtOdemeTarihi: "required",
             
             
@@ -171,7 +179,7 @@
                        res.data.daire_id,
                         res.data.blok_adi,
                         res.data.daire_no,
-                        res.data.daire_tipi,
+                  
                         res.data.kasa,
                         '<a data-id="' + res.data.daire_id + '" class="btn btn-primary btnEdit">Edit</a>' +
                         '<a data-id="' + res.data.daire_id + '" class="btn btn-danger btnDelete">Delete</a>'
@@ -208,7 +216,7 @@
         rules: {
             txtUsername: "required",
             txtPassword: "required",
-            txtDuzenlemeTarihi: "required",
+         
             txtOdemeTarihi: "required",
             
         },
@@ -226,8 +234,8 @@
                         res.data.daire_id,
                         res.data.blok_adi,
                         res.data.daire_no,
-                        res.data.daire_tipi,
-                        res.data.kasa,
+                     
+                       
                       
                         '<a data-id="' + res.data.daire_id + '" class="btn btn-primary btnEdit">Edit</a>' +
                         '<a data-id="' + res.data.daire_id + '" class="btn btn-danger btnDelete">Delete</a>'

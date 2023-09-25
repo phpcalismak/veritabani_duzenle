@@ -41,6 +41,7 @@ $routes->get('download_template_excel','GiderlerController::download_template_ex
 //giderler kategori
 $routes->post('giderler/kategori','GiderlerController::kategoriEkle');
 $routes->get('giderler/giderkategorisil/(:num)','GiderlerController::giderKategoriSil/$1');
+$routes->get('giderler/giderkategoriduzenle/(:num)','GiderlerController::giderKategoriDuzenle/$1');
 
 
 
@@ -105,4 +106,19 @@ $routes->get('iletisim', 'IletisimController::index');
 
 $routes->get('hesap_excel_form' , 'ExcelController::index');
 $routes->post('hesap_excel_upload', 'ExcelController::hesap_excel_upload');
+$routes->get('hesap_excel_template', 'ExcelController::hesap_excel_template');
+
+//duyurular
+
+$routes->get('duyuru_gonder','DuyuruGonderController::index');
+$routes->post('duyuru_post','DuyuruGonderController::gonder');
+$routes->post('/duyurugonder/delete/(:num)','DuyuruGonderController::delete/$1');
+
+
+
+$routes->get('duyurular','DuyurularController::index');
+
+
+$routes->get('profil/(:num)','ProfilController::index/$1');
+
 
